@@ -10081,10 +10081,10 @@ stylis@^3.5.0:
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.4.tgz#f665f25f5e299cf3d64654ab949a57c768b73fbe"
   integrity sha512-8/3pSmthWM7lsPBKv7NXkzn2Uc9W7NotcwGNpJaa3k7WMM1XDCA4MgT5k/8BIexd5ydZdboXtU90XH9Ec4Bv/Q==
 
-suncalc@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/suncalc/-/suncalc-1.8.0.tgz#1d9898109563078750f4994a959e654d876acbf5"
-  integrity sha1-HZiYEJVjB4dQ9JlKlZ5lTYdqy/U=
+suncalc2@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/suncalc2/-/suncalc2-1.8.1.tgz#1efe084f8944724104930a8be5049e2c569d886f"
+  integrity sha512-tNoAni1LqWzBzJRX3NRCsD50gVsuejH1jd9Y+XyKO3WkpPIU+QNyWF4Zf2JnUQKW2LKLWIBgVDQCrgsQwqs0tA==
 
 supports-color@^2.0.0:
   version "2.0.0"

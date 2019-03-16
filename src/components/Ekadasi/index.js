@@ -8,7 +8,7 @@ import {
   isBefore,
   subMinutes,
 } from 'date-fns';
-import SunCalc from 'suncalc';
+import SunCalc from 'suncalc2';
 import MoonPhase from '../Moon';
 
 const ekadasi = ({ date, geo }) => {
