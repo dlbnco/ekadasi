@@ -7,18 +7,25 @@ import {
   subDays,
   isBefore,
   subMinutes,
+  differenceInMilliseconds,
+  addMilliseconds,
 } from 'date-fns';
 import SunCalc from 'suncalc2';
 import MoonPhase from '../Moon';
 
-const ekadasi = ({ date, geo }) => {
-  const tenth = addDays(date, 10);
-  const eleventh = addDays(date, 11);
-  const { sunrise } = SunCalc.getTimes(eleventh, geo.latitude, geo.longitude);
-  if (isBefore(tenth, subMinutes(sunrise, 96))) {
-    return tenth;
+const getSunrise = ({ date, geo }) =>
+  SunCalc.getTimes(date, geo.latitude, geo.longitude).sunrise;
+
+const ekadasi = ({ date, geo, tithi }) => {
+  const eleventh = addMilliseconds(date, tithi * 10);
+  const sunrise = getSunrise({ date: eleventh, geo });
+  const sunriseOffset = subMinutes(sunrise, 96);
+  if (isBefore(eleventh, sunriseOffset)) {
+    return sunrise;
   }
-  return eleventh;
+  const next = addMilliseconds(eleventh, tithi);
+  const nextSunrise = getSunrise({ date: next, geo });
+  return nextSunrise;
 };
 
 const getNextEkadasi = ({ ekadasis, date }) => {
@@ -30,22 +37,24 @@ const getNextEkadasi = ({ ekadasis, date }) => {
 const Ekadasi = ({ date, geo, children }) => {
   return (
     <MoonPhase date={date}>
-      {({ lune, range }) => {
+      {({ lune, range, hunt }) => {
+        const { new_date, nextnew_date } = hunt();
+        const tithi = differenceInMilliseconds(nextnew_date, new_date) / 30;
         const newMoons = range(
           subDays(date, 28),
           addDays(date, 28),
           lune.PHASE_NEW
         );
         const fullMoons = range(
-          subDays(date, 28),
-          addDays(date, 28),
+          subDays(date, 56),
+          addDays(date, 56),
           lune.PHASE_FULL
         );
         const ekadasis = [...newMoons, ...fullMoons].map(date =>
-          ekadasi({ date, geo })
+          ekadasi({ date, geo, tithi })
         );
         const nextEkadasi = getNextEkadasi({ ekadasis, date });
-        return children({ nextEkadasi });
+        return children({ ekadasis, nextEkadasi });
       }}
     </MoonPhase>
   );
