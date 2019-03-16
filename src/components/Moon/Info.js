@@ -33,10 +33,13 @@ const MoonInfo = ({ date }) => {
                         Next Ekadashi
                       </Text>
                       {isTomorrow(nextEkadasi) && (
-                        <Text fontSize={4}>Tomorrow</Text>
+                        <Text fontSize={5}>Tomorrow</Text>
                       )}
-                      <Text fontSize={4}>
+                      <Text fontSize={5}>
                         {format(nextEkadasi, 'dddd, DD MMM')}
+                      </Text>
+                      <Text variant="secondary" my={3}>
+                        Dates may vary
                       </Text>
                     </Flex>
                   </Flex>
