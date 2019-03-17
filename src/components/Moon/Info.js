@@ -21,7 +21,12 @@ const MoonInfo = ({ date }) => {
                   <Flex flexDirection="column" alignItems="center">
                     <MoonCircle size={240} moon={moon(date)} mb={4} />
                     <Box mb={[4, 5]}>
-                      <Text textAlign="center" fontSize={4}>
+                      <Text
+                        textAlign="center"
+                        fontSize={4}
+                        as="time"
+                        dateTime={date.toISOString()}
+                      >
                         {format(date, 'DD MMM YYYY')}
                       </Text>
                       {ekadasis.some(_date => isSameDay(date, _date)) && (
@@ -33,9 +38,19 @@ const MoonInfo = ({ date }) => {
                         Next Ekadashi
                       </Text>
                       {isTomorrow(nextEkadasi) && (
-                        <Text fontSize={5}>Tomorrow</Text>
+                        <Text
+                          fontSize={5}
+                          as="time"
+                          dateTime={nextEkadasi.toISOString()}
+                        >
+                          Tomorrow
+                        </Text>
                       )}
-                      <Text fontSize={5}>
+                      <Text
+                        fontSize={5}
+                        as="time"
+                        dateTime={nextEkadasi.toISOString()}
+                      >
                         {format(nextEkadasi, 'dddd, DD MMM')}
                       </Text>
                       <Text variant="secondary" my={3}>
