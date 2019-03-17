@@ -9,7 +9,7 @@ const date = new Date();
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" keywords={[`ekadasi`, `fasting`]} />
+    <SEO keywords={[`ekadasi`, `ekadashi`, `calendar`, `moon`, `fasting`]} />
     <Container maxWidth={640}>
       <MoonInfo date={date} />
     </Container>
