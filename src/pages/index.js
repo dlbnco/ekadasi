@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MoonInfo from '../components/Moon/Info';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import Container from '../components/Container';
 
