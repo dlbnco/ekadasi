@@ -61,7 +61,7 @@ const MoonCircle = ({ size, moon, rotation, ...props }) => {
       <Half size={size} isVisible={phase <= 0.5}>
         <Circle size={size} />
       </Half>
-      <Difference size={size} phase={moon.phase} />
+      <Difference size={size} phase={phase} />
       <Half size={size} invert isVisible={phase >= 0.5}>
         <Circle size={size} />
       </Half>
