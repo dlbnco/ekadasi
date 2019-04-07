@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Flex, Box } from 'rebass';
 import styled, { css } from 'styled-components';
+import lune from 'lune';
 
 const Wrapper = styled(Flex)`
   position: relative;
@@ -54,8 +55,8 @@ const Circle = styled.div`
   background: white;
 `;
 
-const MoonCircle = ({ size, moon, rotation, ...props }) => {
-  const { phase } = moon;
+const MoonCircle = ({ size, date, rotation, ...props }) => {
+  const { phase } = lune.phase(new Date());
   return (
     <Wrapper rotation={rotation} size={size} {...props}>
       <Half size={size} isVisible={phase <= 0.5}>
