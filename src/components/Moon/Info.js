@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Flex, Box } from 'rebass';
 
 import Text from '../Text';
-import { format, isSameDay, isTomorrow } from 'date-fns';
+import { format, isSameDay, isTomorrow, startOfDay, endOfDay } from 'date-fns';
 import MoonCircle from './Circle';
 import Ekadasi from '../Ekadasi';
 import Geo from '../Geo';
+import AddToCalendar from '../AddToCalendar';
 
 const MoonInfo = ({ date }) => {
   return (
@@ -16,7 +17,7 @@ const MoonInfo = ({ date }) => {
           {({ nextEkadasi, ekadasis }) => (
             <Flex flexDirection="column" alignItems="center">
               <MoonCircle size={240} date={date} mb={4} />
-              <Box mb={[4, 5]}>
+              <Box mb={[3, 4]}>
                 <Text
                   textAlign="center"
                   fontSize={4}
@@ -28,6 +29,9 @@ const MoonInfo = ({ date }) => {
                 {ekadasis.some(_date => isSameDay(date, _date)) && (
                   <Text textAlign="center">Today is Ekadashi day 🌝</Text>
                 )}
+                <Text textAlign="center" fontSize={4}>
+                  –
+                </Text>
               </Box>
               <Flex flexDirection="column" alignItems="center">
                 <Text fontSize={3} variant="secondary">
@@ -49,6 +53,18 @@ const MoonInfo = ({ date }) => {
                 >
                   {format(nextEkadasi, 'dddd, DD MMM')}
                 </Text>
+                <Box my={[3, 4]}>
+                  <AddToCalendar
+                    displayItemIcons={false}
+                    event={{
+                      title: 'Ekadashi day',
+                      description: '',
+                      location: '',
+                      startTime: startOfDay(nextEkadasi),
+                      endTime: endOfDay(nextEkadasi),
+                    }}
+                  />
+                </Box>
                 <Text variant="secondary" my={3}>
                   Dates may vary
                 </Text>
