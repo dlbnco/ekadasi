@@ -55,7 +55,7 @@ const Circle = styled.div`
   background: white;
 `;
 
-const MoonCircle = ({ size, date, rotation, ...props }) => {
+const MoonCircle = ({ size, rotation, ...props }) => {
   const { phase } = lune.phase(new Date());
   return (
     <Wrapper rotation={rotation} size={size} {...props}>
