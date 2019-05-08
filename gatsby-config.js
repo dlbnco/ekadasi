@@ -7,6 +7,12 @@ module.exports = {
   plugins: [
     `gatsby-plugin-styled-components`,
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-92895808-4",
+      },
+    },
+    {
       resolve: `gatsby-plugin-eslint`,
       options: {
         options: {
