@@ -38,7 +38,7 @@ const Ekadasi = ({ date, geo, children }) => {
   return (
     <MoonPhase date={date}>
       {({ lune, range, hunt }) => {
-        const { new_date, nextnew_date } = hunt();
+        const { new_date, nextnew_date } = hunt;
         const tithi = differenceInMilliseconds(nextnew_date, new_date) / 30;
         const newMoons = range(
           subDays(date, 28),

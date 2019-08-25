@@ -19,7 +19,7 @@ const MoonInfo = ({ date }) => {
               <Ekadasi date={date} geo={geo}>
                 {({ nextEkadasi, ekadasis }) => (
                   <Flex flexDirection="column" alignItems="center">
-                    <MoonCircle size={240} moon={moon(date)} mb={4} />
+                    <MoonCircle size={240} moon={moon} mb={4} />
                     <Box mb={[4, 5]}>
                       <Text
                         textAlign="center"
