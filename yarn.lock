@@ -2662,9 +2662,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ekadasi2@workspace:.":
+"ekadasi@workspace:.":
   version: 0.0.0-use.local
-  resolution: "ekadasi2@workspace:."
+  resolution: "ekadasi@workspace:."
   dependencies:
     "@eslint/eslintrc": "npm:^3"
     "@testing-library/dom": "npm:^10.4.0"
