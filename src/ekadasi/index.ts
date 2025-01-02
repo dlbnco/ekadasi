@@ -47,7 +47,7 @@ export const getEkadasiListWithinDateRange = (
 ): Array<Ekadasi> => {
   const significantPhases = getSignificantPhases(start, end);
 
-  return significantPhases.map((p, idx, arr) => {
+  return significantPhases.map((p) => {
     return [
       new Date(p.value - TITHI_DURATION_MS * 5), // the eleventh out of 15
       new Date(p.value - TITHI_DURATION_MS * 4),
