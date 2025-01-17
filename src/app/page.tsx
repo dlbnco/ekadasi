@@ -1,5 +1,7 @@
 import EkadasiSummary from '@/ekadasi/components/Summary';
-import Link from 'next/link'
+import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return (
@@ -27,8 +29,14 @@ export default function Home() {
           worship to the god Vishnu by fasting or just symbolically; the idea
           was always to receive self-discipline and the benefits of fasting and
           it was connected to the way of life via Sanatam Dharma practices.
-          <br/><br/>
-          <Link href="https://github.com/dlbnco/ekadasi" className="block text-center text-foreground">github</Link>
+          <br />
+          <br />
+          <Link
+            href="https://github.com/dlbnco/ekadasi"
+            className="block text-center text-foreground"
+          >
+            github
+          </Link>
         </div>
       </footer>
     </div>
