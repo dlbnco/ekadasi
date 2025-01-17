@@ -5,31 +5,59 @@ import {
   getSunriseAfterEkadasi,
   getSunsetBeforeEkadasi,
 } from '@/ekadasi';
-import { GeoContext } from '@/geo';
 import { endOfYear, format, formatDistance, subDays } from 'date-fns';
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
   date: Date;
   className?: string;
 }
 
+const initialGeo = {
+  latitude: 0,
+  longitude: 0,
+  didAllow: undefined,
+};
+
+interface Geo {
+  latitude: number;
+  longitude: number;
+  didAllow: boolean | undefined;
+}
+
 const EkadasiSummary: React.FC<Props> = ({ date, className }) => {
-  const geoContext = useContext(GeoContext);
+  const [geo, setGeo] = useState<Geo>(initialGeo);
+
+  const request = () => {
+    if (typeof navigator !== 'undefined') {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setGeo(() => ({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              didAllow: true,
+            }));
+          },
+          () => {
+            setGeo((s) => ({ ...s, didAllow: false }));
+          },
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    request();
+  }, []);
   const list = getEkadasiListWithinDateRange(
     subDays(date, 28),
     endOfYear(date),
   );
   const next = getNextEkadasi(date, list);
   if (next == null) return null;
-  const sunset = getSunsetBeforeEkadasi(next, [
-    geoContext.latitude,
-    geoContext.longitude,
-  ]);
-  const sunrise = getSunriseAfterEkadasi(next, [
-    geoContext.latitude,
-    geoContext.longitude,
-  ]);
+  const sunset = getSunsetBeforeEkadasi(next, [geo.latitude, geo.longitude]);
+  const sunrise = getSunriseAfterEkadasi(next, [geo.latitude, geo.longitude]);
   return (
     <div className={className}>
       <div className="border inline-block mx-auto p-6 px-10 font-mono">
@@ -44,10 +72,10 @@ const EkadasiSummary: React.FC<Props> = ({ date, className }) => {
         <div className="text-slate-400 text-sm mt-4">first meal after</div>
         {format(sunrise, 'eeee, dd MMM HH:mm:ss')} (sunrise)
       </div>
-      {geoContext.didAllow === false ? (
+      {geo.didAllow === false ? (
         <>
           <div
-            onClick={geoContext.request}
+            onClick={request}
             className="mt-4 text-orange-500 text-sm cursor-pointer"
           >
             Enable location to get your local Sun hours
