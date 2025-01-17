@@ -44,6 +44,20 @@ const EkadasiSummary: React.FC<Props> = ({ date, className }) => {
         <div className="text-slate-400 text-sm mt-4">first meal after</div>
         {format(sunrise, 'eeee, dd MMM HH:mm:ss')} (sunrise)
       </div>
+      {geoContext.didAllow === false ? (
+        <>
+          <div
+            onClick={geoContext.request}
+            className="mt-4 text-orange-500 text-sm cursor-pointer"
+          >
+            Enable location to get your local Sun hours
+          </div>
+          <span className="text-slate-400 text-xs">
+            Location data is not shared with anyone and only processed in your
+            device
+          </span>
+        </>
+      ) : null}
     </div>
   );
 };
